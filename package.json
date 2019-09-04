@@ -1,0 +1,31 @@
+{
+  "name": "impresion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adimerpaul/impresion.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adimerpaul/impresion/issues"
+  },
+  "homepage": "https://github.com/adimerpaul/impresion#readme",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "datatables": "^1.10.18",
+    "datatables-responsive": "^1.0.7",
+    "datatables.net-dt": "^1.10.19",
+    "datatables.net-responsive": "^2.2.3",
+    "datatables.net-responsive-bs": "^2.2.3",
+    "datatables.net-responsive-dt": "^2.2.3",
+    "font-awesome": "^4.7.0",
+    "popper.js": "^1.15.0",
+    "toastr": "^2.1.4"
+  }
+}
