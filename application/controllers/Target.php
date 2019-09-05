@@ -9,18 +9,6 @@ class Target extends CI_Controller{
         $this->load->view('target');
         $this->load->view('templates/footer');
     }
-    function insert(){
-        $nombre=$_POST['nombre'];
-        $usuario=$_POST['usuario'];
-        $tipo=$_POST['tipo'];
-        $clave=$_POST['clave'];
-        $this->db->query("INSERT INTO usuario SET nombre='$nombre',usuario='$usuario',tipo='$tipo',clave='$clave'");
-        header("Location: ".base_url()."User");
-    }
-    function delete($id){
-        $this->db->query("DELETE FROM usuario WHERE idusuario='$id'");
-        header("Location: ".base_url()."User");
-    }
     function datos($id){
         $query=$this->db->query("SELECT * FROM targeta t 
 INNER JOIN  compra c ON c.idtargeta=t.idtargeta
@@ -35,7 +23,11 @@ WHERE numero='$id'");
         $query=$this->db->query("SELECT * FROM compra WHERE idtargeta='$idtargeta'");
         $idcompra=$query->row()->idcompra;
         $this->db->query("INSERT INTO recarga SET idusuario='$idusuario',monto='$monto',idcompra='$idcompra'");
+        $idrecarga=$this->db->insert_id();
         $this->db->query("UPDATE compra SET monto=monto+$monto WHERE idcompra='$idcompra'");
-        echo 1;
+        $query=$this->db->query("SELECT * FROM recarga r 
+INNER JOIN  compra c ON c.idcompra=r.idcompra
+WHERE idrecarga='$idrecarga'");
+        echo json_encode($query->result());
     }
 }

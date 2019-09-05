@@ -51,6 +51,8 @@
 </div>
 <script >
     window.onload=function (e) {
+
+        var nombreestudiante;
         $('#contenedor').hide();
         var numero;
         $('#insertartargeta').submit(function (e) {
@@ -70,39 +72,49 @@
                     type:'post',
                     url:'Target/insertrecarga',
                     success:function(e) {
-                        console.log(e);
-                        if (e=='1'){
-
+                        var datos=JSON.parse(e)[0];
                             toastr.success('Guardado correctamnte!!');
-                            var pdf = new jsPDF({
-                                // orientation: 'landscape',
-                                unit: 'mm',
-                                format: [750, 550]
-                            })
-                            pdf.setFontSize(10);
-                            pdf.setFontStyle("bold");
-                            pdf.text(6,10,"UNIVERSIDAD TÉCNICA DE ORURO");
-                            pdf.text(5,15,"FACULTAD NACIONAL DE INGENIERÍA");
-                            pdf.text(4,20,"INGENIERÍA DE SISTEMAS E INFORMÁTICA");
-
-                            pdf.text(4,30,"RECIBO por la recarga targeta");
-                            pdf.setFontStyle("normal");
-                            pdf.text(4,35,"El monto de  "+$('#dinero').val());
-
-                            // pdf.text(6,6,"INGENIERÍA DE SISTEMAS E INFORMÁTICA");
-                            // doc.save('Test.pdf');
-                            var cont='<iframe id="pdf_preview" type="application/pdf"  src="'+pdf.output('datauristring')+'" width="750" height="550"></iframe>';
-                            var myWindow=window.open('', "Imprimir credencial", "width=600, height=600");
-                            myWindow.document.write(cont);
+                                        var myWindow=window.open('', "Imprimir credencial", "width=600, height=600");
+                                        var html="<!doctype html>" +
+                                            "<html lang='es'>" +
+                                            "<head>" +
+                                            "<meta charset='UTF-8'>             " +
+                                            "<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>                         <meta http-equiv='X-UA-Compatible' content='ie=edge'>             " +
+                                            "<title>Document</title>" +
+                                            "<style>" +
+                                            ".titulo " +
+                                            "{ font-size: 10px;" +
+                                            "text-align: center" +
+                                            "}" +
+                                            ".contenido{ " +
+                                            "font-size: 13px;" +
+                                            "}" +
+                                            "</style>" +
+                                            "</head>" +
+                                            "<body>" +
+                                            "</html>" +
+                                            "<table>" +
+                                            "<tr>" +
+                                            "<td> <img src='"+window.location+"../../assets/images/sis.png' alt=''></td>" +
+                                            "<td><div class='titulo'>FACULTAD NACIONAL DE INGENIERIA <br> INGENIERIA DE SISTEMAS E  INFORMATICA <br>CENTRO DE IMPRESIONES</div></td>" +
+                                            "<td> <img src='"+window.location+"../../assets/images/inf.png'></td>" +
+                                            "</tr>" +
+                                            "<tr>" +
+                                            "<td colspan='3'> <p class='contenido'><b>Estudiante: </b> "+nombreestudiante+" <br><b>Monto de recarga: </b>"+$('#dinero').val()+" <br> <b>Credito TOTAL : </b>"+datos.monto+"</p></td>" +
+                                            "</tr>" +
+                                            "</table>" +
+                                            "</body>";
+                                        myWindow.onload=function () {
+                                            myWindow.document.write(html);
+                                            setTimeout(function () {
+                                                myWindow.print() ;
+                                                myWindow.close();
+                                            }, 100)
+                                        }
 
                             $('#dinero').focus();
                             $('#dinero').val('');
                             actualizar(numero);
-
-                        }else{
-                            toastr.error('formato no correcto!!');
-                        }
-
                     }
                 })
             }
@@ -114,7 +126,7 @@
                 success:function(e) {
                     $('#targeta').val('');
                     var dato=JSON.parse(e)[0];
-                    console.log(dato);
+                    //console.log(dato);
                     if (dato==undefined){
                         alert('targeta no encontrada!!');
                         $('#targeta').focus();
@@ -123,6 +135,7 @@
                         $('#dinero').focus();
                         $('#contenedor').show();
                         $('#name').html(dato.nombre);
+                        nombreestudiante=dato.nombre;
                         $('#carre').html("Carrera:"+dato.sede);
                         $('#photo').prop('src',window.location+'/../fotos/'+dato.ciestudiante+'.jpg');
                         $('#numero').html('<b>Numero:</b> '+dato.numero);

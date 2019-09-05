@@ -22,4 +22,12 @@ WHERE r.tipo='REGARGA'
 AND date(r.fecha)>='$d1' AND date(r.fecha)<='$d2'");
         echo json_encode($query->result());
     }
+    function datos2($d1,$d2){
+        $query=$this->db->query("SELECT c.costo,numero,e.nombre as estudiante,carrera,c.fecha
+FROM targeta t
+INNER JOIN compra c ON c.idtargeta=t.idtargeta
+INNER JOIN estudiante e ON c.idestudiante=e.idestudiante
+AND date(c.fecha)>='$d1' AND date(c.fecha)<='$d2'");
+        echo json_encode($query->result());
+    }
 }

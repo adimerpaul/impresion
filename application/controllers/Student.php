@@ -22,7 +22,7 @@ class Student extends CI_Controller{
         echo json_encode($query->result());
     }
     function targetas($id){
-        $query=$this->db->query("SELECT * FROM compra c INNER JOIN targeta t ON c.idtargeta=t.idtargeta  WHERE idestudiante='$id'");
+        $query=$this->db->query("SELECT c.idcompra,c.fecha,c.monto,t.numero,t.estado FROM compra c INNER JOIN targeta t ON c.idtargeta=t.idtargeta  WHERE idestudiante='$id'");
         echo json_encode($query->result());
     }
     function inserttargeta(){
@@ -34,7 +34,8 @@ class Student extends CI_Controller{
         }else{
         $idtargeta=$query->row()->idtargeta;
         $idestudiante=$_POST['idestudiante'];
-        $this->db->query("INSERT INTO compra SET idestudiante='$idestudiante',idtargeta='$idtargeta'");
+        $costo=$this->db->query("SELECT * FROM configuracion WHERE idconfiguracion=4")->row()->estado;
+        $this->db->query("INSERT INTO compra SET idestudiante='$idestudiante',idtargeta='$idtargeta',costo='$costo'");
         $idcompra=$this->db->insert_id();
 //        echo $this->db->query("SELECT * FROM compra WHERE idestudiante='$idestudiante'")->num_rows() ;
 //        exit;
@@ -53,5 +54,9 @@ class Student extends CI_Controller{
 
         echo 1;
         }
+    }
+    function configuracion(){
+        $query=$this->db->query("SELECT * FROM configuracion");
+        echo json_encode($query->result());
     }
 }

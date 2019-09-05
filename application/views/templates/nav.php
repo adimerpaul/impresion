@@ -35,9 +35,15 @@
         <li class="nav-item">
             <a class="nav-link" href="<?=base_url()?>Student">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
-                <span class="menu-title"> <i class="fa fa-user-circle-o"></i> Controlar estudiantes</span>
+                <span class="menu-title"> <i class="fa fa-user-circle-o"></i> Dar targeta</span>
             </a>
         </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?=base_url()?>Actualizar">
+                    <i class="menu-icon typcn typcn-shopping-bag"></i>
+                    <span class="menu-title"> <i class="fa fa-user-circle-o"></i> Actualizar datos</span>
+                </a>
+            </li>
 
         <li class="nav-item">
             <a class="nav-link" href="<?=base_url()?>Target">

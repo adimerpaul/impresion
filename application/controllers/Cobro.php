@@ -34,7 +34,11 @@ WHERE numero='$id'");
         $query=$this->db->query("SELECT * FROM compra WHERE idtargeta='$idtargeta'");
         $idcompra=$query->row()->idcompra;
         $this->db->query("INSERT INTO cobro SET idusuario='$idusuario',monto='$monto',idcompra='$idcompra'");
+        $idcobro=$this->db->insert_id();
         $this->db->query("UPDATE compra SET monto=monto-$monto WHERE idcompra='$idcompra'");
-        echo 1;
+        $query=$this->db->query("SELECT * FROM cobro co 
+INNER JOIN  compra c ON c.idcompra=co.idcompra
+WHERE idcobro='$idcobro'");
+        echo json_encode($query->result());
     }
 }
