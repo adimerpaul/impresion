@@ -24,7 +24,7 @@ class Welcome extends CI_Controller {
 	}
 	public function login(){
 	    $usuario=$_POST['usuario'];
-        $clave=$_POST['clave'];
+        $clave=md5($_POST['clave']);
         $query=$this->db->query("SELECT * FROM usuario WHERE usuario='$usuario' AND clave='$clave' AND estado='ACTIVO'");
         echo $query->num_rows();
         if ($query->num_rows()==1){
@@ -33,6 +33,7 @@ class Welcome extends CI_Controller {
             $_SESSION['idusuario']=$row->idusuario;
             $_SESSION['clave']=$row->clave;
             $_SESSION['tipo']=$row->tipo;
+            $_SESSION['clave']=$row->clave;
             echo "<meta http-equiv='refresh' content='0; url=".base_url()."Main'>";
         }else{
             echo "<meta http-equiv='refresh' content='0; url=".base_url()."'>";
@@ -40,7 +41,7 @@ class Welcome extends CI_Controller {
     }
     function logout(){
 	    session_destroy();
-        echo "<meta http-equiv='refresh' content='0; url=".base_url()."'>";
+        echo "<meta http-equiv='refresh' content='0; url=".base_url()."Admin'>";
     }
     function verify(){
         $clave=$_POST['clave'];

@@ -76,6 +76,7 @@
                         <td><div class='badge badge-$c'>$row->estado</div></td>
                         <td>
                         <a href='".base_url()."User/delete/$row->idusuario' class='btn btn-danger btn-sm p-1 text-white eli'><i class='fa fa-trash'></i> Eliminar</a>
+                        <a href='".base_url()."User/update/$row->idusuario' class='btn btn-warning btn-sm p-1 text-white update'><i class='fa fa-key'></i> Cambiar pass a 123</a>
                         </td>
                       </tr>";
             }
@@ -114,6 +115,11 @@
         } );
         $('.eli').click(function (e) {
             if (!confirm("Seguro de eliminar?")){
+                e.preventDefault();
+            }
+        });
+        $('.update').click(function (e) {
+            if (!confirm("Seguro de cambiar el pass a 123?")){
                 e.preventDefault();
             }
         });

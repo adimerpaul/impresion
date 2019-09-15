@@ -97,7 +97,12 @@
                 </a>
             </li>
         <?php endif;?>
-
+        <li class="nav-item">
+            <a class="nav-link" href="<?=base_url()?>Pass">
+                <i class="menu-icon typcn typcn-bell"></i>
+                <span class="menu-title"><i class="fa fa-key"></i> Cambiar password</span>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="<?=base_url()?>Welcome/logout">
                 <i class="menu-icon typcn typcn-bell"></i>
