@@ -72,44 +72,44 @@
                     success:function(e) {
                         var datos=JSON.parse(e)[0];
                         toastr.success('Guardado correctamnte!!');
-                        var myWindow=window.open('', "Imprimir credencial", "width=600, height=600");
-                        var html="<!doctype html>" +
-                            "<html lang='es'>" +
-                            "<head>" +
-                            "<meta charset='UTF-8'>             " +
-                            "<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>                         <meta http-equiv='X-UA-Compatible' content='ie=edge'>             " +
-                            "<title>Document</title>" +
-                            "<style>" +
-                            ".titulo " +
-                            "{ font-size: 10px;" +
-                            "text-align: center" +
-                            "}" +
-                            ".contenido{ " +
-                            "font-size: 13px;" +
-                            "}" +
-                            "</style>" +
-                            "</head>" +
-                            "<body>" +
-                            "</html>" +
-                            "<table>" +
-                            "<tr>" +
-                            "<td> <img src='"+window.location+"../../assets/images/sis.png' alt=''></td>" +
-                            "<td><div class='titulo'>FACULTAD NACIONAL DE INGENIERIA <br> INGENIERIA DE SISTEMAS E  INFORMATICA <br>CENTRO DE IMPRESIONES</div></td>" +
-                            "<td> <img src='"+window.location+"../../assets/images/inf.png'></td>" +
-                            "</tr>" +
-                            "<tr>" +
-                            "<td colspan='3'> <p class='contenido'><b>Estudiante: </b> "+nombreestudiante+" <br><b>Monto a cobrar: </b>"+$('#dinero').val()+" <br> <b>Credito TOTAL : </b>"+datos.monto+"</p></td>" +
-                            "</tr>" +
-                            "</table>" +
-                            "</body>";
-                        myWindow.onload=function () {
-                            myWindow.document.write(html);
-                            setTimeout(function () {
-                                myWindow.print() ;
-                                myWindow.close();
-                            }, 100)
-                        }
-
+                        // var myWindow=window.open('', "Imprimir credencial", "width=600, height=600");
+                        // var html="<!doctype html>" +
+                        //     "<html lang='es'>" +
+                        //     "<head>" +
+                        //     "<meta charset='UTF-8'>             " +
+                        //     "<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>                         <meta http-equiv='X-UA-Compatible' content='ie=edge'>             " +
+                        //     "<title>Document</title>" +
+                        //     "<style>" +
+                        //     ".titulo " +
+                        //     "{ font-size: 10px;" +
+                        //     "text-align: center" +
+                        //     "}" +
+                        //     ".contenido{ " +
+                        //     "font-size: 13px;" +
+                        //     "}" +
+                        //     "</style>" +
+                        //     "</head>" +
+                        //     "<body>" +
+                        //     "</html>" +
+                        //     "<table>" +
+                        //     "<tr>" +
+                        //     "<td> <img src='"+window.location+"../../assets/images/sis.png' alt=''></td>" +
+                        //     "<td><div class='titulo'>FACULTAD NACIONAL DE INGENIERIA <br> INGENIERIA DE SISTEMAS E  INFORMATICA <br>CENTRO DE IMPRESIONES</div></td>" +
+                        //     "<td> <img src='"+window.location+"../../assets/images/inf.png'></td>" +
+                        //     "</tr>" +
+                        //     "<tr>" +
+                        //     "<td colspan='3'> <p class='contenido'><b>Estudiante: </b> "+nombreestudiante+" <br><b>Monto a cobrar: </b>"+$('#dinero').val()+" <br> <b>Credito TOTAL : </b>"+datos.monto+"</p></td>" +
+                        //     "</tr>" +
+                        //     "</table>" +
+                        //     "</body>";
+                        // myWindow.onload=function () {
+                        //     myWindow.document.write(html);
+                        //     setTimeout(function () {
+                        //         myWindow.print() ;
+                        //         myWindow.close();
+                        //     }, 100)
+                        // }
+                        window.open(window.location+'/targeta/'+datos.idcobro, '_blank');
                         $('#dinero').focus();
                         $('#dinero').val('');
                         actualizar(numero);

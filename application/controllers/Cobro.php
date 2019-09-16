@@ -1,4 +1,5 @@
 <?php
+require_once('tcpdf.php');
 class Cobro extends CI_Controller{
     function index(){
         if ($_SESSION['tipo']==""){
@@ -40,5 +41,51 @@ WHERE numero='$id'");
 INNER JOIN  compra c ON c.idcompra=co.idcompra
 WHERE idcobro='$idcobro'");
         echo json_encode($query->result());
+    }
+    function targeta($id){
+        $row=$this->db->query("SELECT co.fecha,e.nombre,c.monto,co.monto recarga
+FROM cobro co 
+INNER JOIN compra c ON co.idcompra=c.idcompra
+INNER JOIN estudiante e ON e.idestudiante=c.idestudiante
+WHERE co.idcobro='$id'")->row();
+        $nombre=$row->nombre;
+        $monto=$row->monto;
+        $fecha=$row->fecha;
+        $recarga=$row->recarga;
+
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, $unit='mm', array(80,210), true, 'UTF-8', false);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetMargins(0, 0, 0);
+
+        $pdf->AddPage();
+
+        $html = '
+<div style="font-size: 7px;font-weight: bold;text-align: center;margin: 0;">
+<table>
+<tr>
+<td width="15%">
+<img src="'.base_url().'assets/images/sis.png" >
+</td>
+<td width="70%">
+FACULTAD NACIONAL DE INGENIERIA <br> INGENIERIA DE SISTEMAS E  INFORMATICA <br>CENTRO DE IMPRESIONES <br> Nº '.$id.'
+</td>
+<td width="15%">
+<img src="'.base_url().'assets/images/inf.png" >
+</td>
+</tr>
+</table>
+</div>
+<small style="border: 50px">
+&nbsp;&nbsp; <b> Estudiante: </b>'.$nombre.' <br>
+&nbsp;&nbsp; <b> Fecha: </b>'.$fecha.'<br>
+&nbsp;&nbsp; <b> Saldo Actual: </b>'.$monto.' Bs.<br>
+&nbsp;&nbsp; <b> Monto del cobro: </b>'.$recarga.' Bs.<br>
+
+</small>';
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->Output('example_006.pdf', 'I');
+
+
     }
 }

@@ -251,64 +251,64 @@
                             '                                            <td>'+e.fecha+'</td>\n' +
                             '                                            <td>'+e.monto+'</td>\n' +
                             '                                            <td>'+e.estado+'</td>\n' +
-                            '                                            <td><button type="button" data-numero="'+e.numero+'" data-monto="'+e.monto+'" class="btn btn-info btn-sm p-1 imprimir" > <i class="fa fa-credit-card"></i> Print target</button></td>\n' +
+                            '                                            <td><a href="'+window.location+'/target/'+e.idcompra+'" target="_blank" class="btn btn-info btn-sm p-1" > <i class="fa fa-credit-card"></i> Print target</a></td>\n' +
                             '                                        </tr>');
                     });
-                    $('.imprimir').click(function (e) {
-                        var nombre = $('#nombre').val();
-                        var total = $(this).data('monto');
-                        $.ajax({
-                            url:'Student/configuracion',
-                            success:function (e) {
-                                var dato= JSON.parse(e);
-
-                                var monto=dato[0].estado;
-                                var costo=dato[1].estado;
-                                var myWindow=window.open('', "Imprimir credencial", "width=600, height=600");
-                                var html="<!doctype html>" +
-                                    "<html lang='es'>" +
-                                    "<head>" +
-                                    "<meta charset='UTF-8'>             " +
-                                    "<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>                         <meta http-equiv='X-UA-Compatible' content='ie=edge'>             " +
-                                    "<title>Document</title>" +
-                                    "<style>" +
-                                    ".titulo " +
-                                    "{ font-size: 10px;" +
-                                    "text-align: center" +
-                                    "}" +
-                                    ".contenido{ " +
-                                    "font-size: 13px;" +
-                                    "}" +
-                                    "</style>" +
-                                    "</head>" +
-                                    "<body>" +
-                                    "</html>" +
-                                    "<table>" +
-                                    "<tr>" +
-                                    "<td> <img src='"+window.location+"../../assets/images/sis.png' alt=''></td>" +
-                                    "<td><div class='titulo'>FACULTAD NACIONAL DE INGENIERIA <br> INGENIERIA DE SISTEMAS E  INFORMATICA <br>CENTRO DE IMPRESIONES</div></td>" +
-                                    "<td> <img src='"+window.location+"../../assets/images/inf.png'></td>" +
-                                    "</tr>" +
-                                    "<tr>" +
-                                    "<td colspan='3'> <p class='contenido'><b>Estudiante: </b> "+nombre+" <br><b>Costo de la targeta: </b>"+costo+" <br> <b>Credito cargado: </b> "+monto+"<br><b>Credito TOTAL : </b>"+total+"</p></td>" +
-                                    "</tr>" +
-                                    "</table>" +
-                                    "</body>";
-                                myWindow.onload=function () {
-                                    myWindow.document.write(html);
-                                    setTimeout(function () {
-                                        myWindow.print() ;
-                                        myWindow.close();
-                                    }, 500)
-
-                                }
-                                //myWindow.document.write(html);
-
-                            }
-                        });
-
-                        e.preventDefault();
-                    });
+                    // $('.imprimir').click(function (e) {
+                    //     var nombre = $('#nombre').val();
+                    //     var total = $(this).data('monto');
+                    //     $.ajax({
+                    //         url:'Student/configuracion',
+                    //         success:function (e) {
+                    //             var dato= JSON.parse(e);
+                    //
+                    //             var monto=dato[0].estado;
+                    //             var costo=dato[1].estado;
+                    //             var myWindow=window.open('', "Imprimir credencial", "width=600, height=600");
+                    //             var html="<!doctype html>" +
+                    //                 "<html lang='es'>" +
+                    //                 "<head>" +
+                    //                 "<meta charset='UTF-8'>             " +
+                    //                 "<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>                         <meta http-equiv='X-UA-Compatible' content='ie=edge'>             " +
+                    //                 "<title>Document</title>" +
+                    //                 "<style>" +
+                    //                 ".titulo " +
+                    //                 "{ font-size: 10px;" +
+                    //                 "text-align: center" +
+                    //                 "}" +
+                    //                 ".contenido{ " +
+                    //                 "font-size: 13px;" +
+                    //                 "}" +
+                    //                 "</style>" +
+                    //                 "</head>" +
+                    //                 "<body>" +
+                    //                 "</html>" +
+                    //                 "<table>" +
+                    //                 "<tr>" +
+                    //                 "<td> <img src='"+window.location+"../../assets/images/sis.png' alt=''></td>" +
+                    //                 "<td><div class='titulo'>FACULTAD NACIONAL DE INGENIERIA <br> INGENIERIA DE SISTEMAS E  INFORMATICA <br>CENTRO DE IMPRESIONES</div></td>" +
+                    //                 "<td> <img src='"+window.location+"../../assets/images/inf.png'></td>" +
+                    //                 "</tr>" +
+                    //                 "<tr>" +
+                    //                 "<td colspan='3'> <p class='contenido'><b>Estudiante: </b> "+nombre+" <br><b>Costo de la targeta: </b>"+costo+" <br> <b>Credito cargado: </b> "+monto+"<br><b>Credito TOTAL : </b>"+total+"</p></td>" +
+                    //                 "</tr>" +
+                    //                 "</table>" +
+                    //                 "</body>";
+                    //             myWindow.onload=function () {
+                    //                 myWindow.document.write(html);
+                    //                 setTimeout(function () {
+                    //                     myWindow.print() ;
+                    //                     myWindow.close();
+                    //                 }, 500)
+                    //
+                    //             }
+                    //             //myWindow.document.write(html);
+                    //
+                    //         }
+                    //     });
+                    //
+                    //     e.preventDefault();
+                    // });
                 }
             })
         };
