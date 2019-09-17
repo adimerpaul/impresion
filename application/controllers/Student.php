@@ -68,7 +68,7 @@ WHERE idcompra='$id'")->row();
         $monto=$row->monto;
         $fecha=$row->fecha;
         $costo=$row->costo;
-
+        $montoreg=$this->db->query("SELECT * FROM configuracion WHERE idconfiguracion='1'")->row()->estado;
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, $unit='mm', array(80,210), true, 'UTF-8', false);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
@@ -96,7 +96,7 @@ FACULTAD NACIONAL DE INGENIERIA <br> INGENIERIA DE SISTEMAS E  INFORMATICA <br>C
 &nbsp;&nbsp; <b> Estudiante: </b>'.$nombre.' <br>
 &nbsp;&nbsp; <b> Fecha: </b>'.$fecha.'<br>
 &nbsp;&nbsp; <b> Saldo Actual: </b>'.$monto.' Bs.<br>
-&nbsp;&nbsp; <b> Costo de la targeta: </b>'.$costo.' Bs.<br>
+&nbsp;&nbsp; <b> Monto cobrado: </b>'.($montoreg + $costo).' Bs.<br>
 
 </small>';
         $pdf->writeHTML($html, true, false, true, false, '');

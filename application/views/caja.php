@@ -1,6 +1,7 @@
 <div class="content-wrapper">
+<?php if ($_SESSION['tipo']=='ADMIN'):?>
 <h3>Targetas entregadas</h3>
-<table id="example" class="display responsive nowrap" style="width:50%;">
+    <table id="example" class="display responsive nowrap" style="width:50%;">
         <thead>
         <tr>
             <th>idtargeta</th>
@@ -77,6 +78,7 @@ INNER JOIN usuario u ON u.idusuario=r.idusuario");
 
         </tbody>
     </table>
+<?php endif;?>
     <h3>Monto cobrados</h3>
     <table id="example3" class="display responsive nowrap" style="width:50%;">
         <thead>
@@ -93,12 +95,18 @@ INNER JOIN usuario u ON u.idusuario=r.idusuario");
         <tbody>
 
         <?php
+        if ($_SESSION['tipo']=='ADMIN'){
+            $consulta="";
+        }else{
+            $consulta="WHERE date(co.fecha)=date(now())";
+        }
         $query=$this->db->query("SELECT co.idcobro,u.nombre,co.monto,numero,e.nombre as estudiante,carrera,co.fecha 
 FROM targeta t 
 INNER JOIN compra c ON c.idtargeta=t.idtargeta
 INNER JOIN estudiante e ON c.idestudiante=e.idestudiante
 INNER JOIN cobro co ON co.idcompra=c.idcompra
-INNER JOIN usuario u ON u.idusuario=co.idusuario");
+INNER JOIN usuario u ON u.idusuario=co.idusuario
+$consulta");
         foreach ($query->result() as $row){
             echo "<tr>
                         <td>$row->idcobro</td>

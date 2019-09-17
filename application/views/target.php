@@ -5,7 +5,7 @@
     <form class="form-inline" method="post" id="insertartargeta">
         <label for="targeta" class="col-sm-2 col-form-label">Targeta</label>
         <div class="col-sm-4">
-            <input type="text" name="correo" autofocus  class="form-control" id="targeta" placeholder="Numero de targeta" required>
+            <input type="password" name="correo" autofocus  class="form-control" id="targeta" placeholder="Numero de targeta" required>
         </div>
         <div class="col-sm-5">
             <button type="submit" class="btn btn-success p-1"> <i class="fa fa-credit-card-alt"></i> Ver Targeta</button>

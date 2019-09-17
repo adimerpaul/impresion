@@ -96,6 +96,12 @@
                     <span class="menu-title"><i class="fa fa-usd"> </i> Cobro de targetas</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?=base_url()?>Caja">
+                    <i class="menu-icon typcn typcn-th-large-outline"></i>
+                    <span class="menu-title"><i class="fa fa-file-pdf-o"> </i> Montos del dia</span>
+                </a>
+            </li>
         <?php endif;?>
         <li class="nav-item">
             <a class="nav-link" href="<?=base_url()?>Pass">
